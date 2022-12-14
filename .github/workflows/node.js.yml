@@ -27,10 +27,8 @@ jobs:
         node-version: ${{ matrix.node-version }} 
     - name: Install Node Modules
       run: npm install
-    - name: Build
-      run: npm run build
-    - name: Test
-      run: npm test
+    - name: Credential ${{secrets.PROD_USER}}@${{secrets.PROD_HOST}}
+    - name: SSH ${{ secrets.PROD_SSH_KEY }}
     - name: run deploy script on host server
       uses: JimCronqvist/action-ssh@master
       env:
