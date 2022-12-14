@@ -31,3 +31,12 @@ jobs:
       run: npm run build
     - name: Test
       run: npm test
+    - name: run deploy script on host server
+      uses: JimCronqvist/action-ssh@master
+      env:
+        NAME: "Root"
+      with:
+        hosts: ${{secrets.PROD_USER}}@${{secrets.PROD_HOST}}
+        privateKey: ${{ secrets.PROD_SSH_KEY }}
+        debug: false
+        command: /var/www/html/omnisafe-react-testing/deploy.sh
