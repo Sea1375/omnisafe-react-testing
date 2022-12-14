@@ -21,14 +21,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }} / ${{secrets.PROD_USER}}@${{secrets.PROD_HOST}} / ${{ secrets.PROD_SSH_KEY }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }} 
     - name: Install Node Modules
       run: npm install
-    - name: Credential ${{secrets.PROD_USER}}@${{secrets.PROD_HOST}}
-    - name: SSH ${{ secrets.PROD_SSH_KEY }}
     - name: run deploy script on host server
       uses: JimCronqvist/action-ssh@master
       env:
